@@ -3,12 +3,15 @@ alphabet_string = 'abcdefghijklmnopqrstuvwxyz'
 
 def main():
     text = book_text(book_path)
-    print(f"--- Begin report of {book_path} ---")
     wordCount = word_count(text)
-    print(f"{wordCount} words found in the document\n")
     charDict = char_count(text)
     char_sort_list = sort_character(charDict)
-    print("--- End report ---")
+    
+    print(f"\n--- Begin report of {book_path} ---\n")
+    print(f"{wordCount} words found in the document\n")
+    for d in char_sort_list:
+        print(f"The '{d[0]}' character was found {d[1]} times")
+    print("\n--- End report ---")
     
 def book_text(path):
     with open(path) as f:
@@ -33,12 +36,9 @@ def char_count(text):
     return dictResult
 
 
+
 def sort_character(dict):
-    sorted_list = sorted(dict.items(), key=lambda item: item[1],reverse=True)
-    for d in sorted_list:
-        print(f"The '{d[0]}' character was found {d[1]} times")
-    print () # print \n
-    return sorted_list
+    return sorted(dict.items(), key=lambda item: item[1],reverse=True)
 
 
 main ()
