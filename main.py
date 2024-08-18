@@ -1,11 +1,15 @@
 book_path = "books/frankenstein.txt"
+alphabet_string = 'abcdefghijklmnopqrstuvwxyz'
 
 def main():
     text = book_text(book_path)
+    print(f"--- Begin report of {book_path} ---")
     wordCount = word_count(text)
+    print(f"{wordCount} words found in the document\n")
     charDict = char_count(text)
-    print(f"{wordCount} words found in the document\n{charDict}")
-
+    char_sort_list = sort_character(charDict)
+    print("--- End report ---")
+    
 def book_text(path):
     with open(path) as f:
         file_contents = f.read()
@@ -20,13 +24,21 @@ def char_count(text):
     dictResult = {}
     for char in loweredCase:
         count = 0
-        if char not in dictResult:
+        if char not in dictResult and char in alphabet_string: #chat must appear in alphabet_list
             dictResult[char] = 1
-        else:
+        elif char in alphabet_string:
             dictResult[char] += 1
 
 
     return dictResult
+
+
+def sort_character(dict):
+    sorted_list = sorted(dict.items(), key=lambda item: item[1],reverse=True)
+    for d in sorted_list:
+        print(f"The '{d[0]}' character was found {d[1]} times")
+    print () # print \n
+    return sorted_list
 
 
 main ()
